@@ -1,23 +1,23 @@
 {
   "schemaVersion": 1,
-  "id": "starter",
+  "id": "zeldrops",
   "version": "$version",
 
-  "name": "Fabric Starter",
+  "name": "Zeldrops",
   "icon": "assets/starter/icon.png",
-  "description": "Template for starting out Fabric mods",
+  "description": "Zelda like item drops from mobs!",
   "licence": "MIT",
   "contact": {
-    "sources": "https://github.com/CottonMC/FabricStarter"
+    "sources": "https://github.com/CottonMC/Zeldrops"
   },
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.cottonmc.starter.FabricStarter"
+      "io.github.cottonmc.zeldrops.Zeldrops"
     ]
   },
   "mixins": [
-    "mixins.starter.json"
+    "mixins.zeldrops.json"
   ],
   "depends": {
     "fabricloader": ">=0.4.0"

@@ -1,0 +1,9 @@
+{
+  "heal": {
+    "category": "players",
+    "sounds": [
+      "zeldrops:heal"
+    ],
+    "subtitle": "subtitle.zeldrops.heal"
+  }
+}
