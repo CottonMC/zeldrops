@@ -3,7 +3,9 @@
   "package": "io.github.cottonmc.zeldrops.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "LootConditionTypesAccessor",
     "MixinItemEntity",
+    "MixinLootManager",
     "MixinPlayerPredicate"
   ]
 }

@@ -1,22 +1,7 @@
-buildscript {
-	repositories {
-		jcenter()
-		maven {
-			name = 'Fabric'
-			url = 'http://maven.modmuss50.me/'
-		}
-	}
-	dependencies {
-		classpath "net.fabricmc:fabric-loom:0.2.4-SNAPSHOT"
-	}
-}
-
 plugins {
-	id 'java'
-	id 'eclipse'
-	id 'idea'
-	id 'maven-publish'
-	id "com.jfrog.artifactory" version "4.9.0"
+	id "fabric-loom" version "0.4-SNAPSHOT"
+	id "maven-publish"
+	id "com.jfrog.artifactory" version "4.15.2"
 }
 
 apply plugin: net.fabricmc.loom.LoomGradlePlugin
@@ -30,7 +15,7 @@ if(rootProject.file('private.gradle').exists()) { //Publishing details
 
 archivesBaseName = "zeldrops"
 group = "io.github.cottonmc"
-version = "1.0.0+19w38b"
+version = "1.0.0+1.16.1"
 
 minecraft {
 }
@@ -41,10 +26,10 @@ repositories {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:19w39a"
-	mappings "net.fabricmc:yarn:19w39a+build.8"
-	modApi "net.fabricmc:fabric-loader:0.6.2+build.166"
-	modApi "net.fabricmc.fabric-api:fabric-api:0.4.2+build.244-1.15"
+	minecraft "com.mojang:minecraft:1.16.1"
+	mappings "net.fabricmc:yarn:1.16.1+build.21:v2"
+	modImplementation "net.fabricmc:fabric-loader:0.9.0+build.204"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:0.16.2+build.385-1.16.1"
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 }
 

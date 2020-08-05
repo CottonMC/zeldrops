@@ -17,18 +17,22 @@ public class HeartItem extends Item implements CustomPickup {
 	public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
 		if (entity instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) entity;
-			if (player.getHealth() < player.getMaximumHealth() && !player.getItemCooldownManager().isCoolingDown(this)) {
+			if (player.getHealth() < player.getMaxHealth() && !player.getItemCooldownManager().isCoolingDown(this)) {
 				player.heal(2f);
 				player.getItemCooldownManager().set(this, 20);
 				player.playSound(Zeldrops.HEAL, SoundCategory.PLAYERS, 1f, 1f);
 				stack.decrement(1);
+			}
+			if (player.getHealth() == player.getMaxHealth() && !player.isCreative()) {
+				player.playSound(Zeldrops.HEAL, SoundCategory.PLAYERS, 1f, 1f);
+				stack.setCount(0);
 			}
 		}
 	}
 
 	@Override
 	public boolean canPickUp(ItemStack stack, PlayerEntity player) {
-		return player.getHealth() < player.getMaximumHealth() && !player.getItemCooldownManager().isCoolingDown(this);
+		return player.getHealth() < player.getMaxHealth() && !player.getItemCooldownManager().isCoolingDown(this);
 	}
 
 	@Override

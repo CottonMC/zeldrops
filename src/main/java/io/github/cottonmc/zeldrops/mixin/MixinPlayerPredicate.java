@@ -39,6 +39,8 @@ public class MixinPlayerPredicate implements PlayerPredicateAccessor {
 
     private NumberRange.FloatRange health = NumberRange.FloatRange.ANY;
 
+    private boolean onlyWhenDamaged = false;
+
     @Override
     public void setExperienceLevel(NumberRange.IntRange range) {
         this.experienceLevel = range;
@@ -64,6 +66,11 @@ public class MixinPlayerPredicate implements PlayerPredicateAccessor {
         this.health = range;
     }
 
+    @Override
+    public void setOnlyWhenDamaged(boolean onlyWhenDamaged) {
+        this.onlyWhenDamaged = onlyWhenDamaged;
+    }
+
     @Inject(method = "fromJson", at = @At("RETURN"))
     private static void deserializeHealth(@Nullable JsonElement json, CallbackInfoReturnable<PlayerPredicate> info) {
         PlayerPredicate pred = info.getReturnValue();
@@ -79,6 +86,10 @@ public class MixinPlayerPredicate implements PlayerPredicateAccessor {
 
     @Inject(method = "test", at = @At("TAIL"), cancellable = true)
     private void testPlayerHealth(Entity entity, CallbackInfoReturnable<Boolean> info) {
-        if (!this.health.test(((ServerPlayerEntity)entity).getHealth())) info.setReturnValue(false);
+        ServerPlayerEntity player = (ServerPlayerEntity) entity;
+        if (!this.health.test((player.getHealth()))) info.setReturnValue(false);
+        if (onlyWhenDamaged) {
+            if (player.getHealth() == player.getMaxHealth()) info.setReturnValue(false);
+        }
     }
 }

@@ -17,6 +17,7 @@ public class PlayerPredicateBuilder extends PlayerPredicate.Builder {
     private Object2BooleanMap<Identifier> recipes = null;
     //TODO: advancement support
     private NumberRange.FloatRange health = null;
+    private boolean onlyWhenDamaged = false;
 
     public PlayerPredicateBuilder withExperienceLevel(NumberRange.IntRange level) {
         this.experienceLevel = level;
@@ -43,6 +44,11 @@ public class PlayerPredicateBuilder extends PlayerPredicate.Builder {
         return this;
     }
 
+    public PlayerPredicateBuilder setOnlyWhenDamaged() {
+        this.onlyWhenDamaged = true;
+        return this;
+    }
+
     public PlayerPredicate build() {
         PlayerPredicate ret = super.build();
         PlayerPredicateAccessor accessor = (PlayerPredicateAccessor)ret;
@@ -52,6 +58,7 @@ public class PlayerPredicateBuilder extends PlayerPredicate.Builder {
         if (recipes != null) accessor.setRecipes(recipes);
         if (health != null) accessor.setHealth(health);
         else accessor.setHealth(NumberRange.FloatRange.ANY);
+        accessor.setOnlyWhenDamaged(onlyWhenDamaged);
         return ret;
     }
 }

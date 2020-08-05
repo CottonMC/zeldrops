@@ -17,8 +17,10 @@ public interface PlayerPredicateAccessor {
 
     void setRecipes(Object2BooleanMap<Identifier> recipes);
 
-    //TODO: figure out a way to do advancement predicates
+    //TODO: figure out a way to do advancement predicates?
 //    void setAdvancements(Map<Identifier, PlayerPredicate.AdvancementPredicate> advancements)
 
     void setHealth(NumberRange.FloatRange range);
+
+    void setOnlyWhenDamaged(boolean value);
 }

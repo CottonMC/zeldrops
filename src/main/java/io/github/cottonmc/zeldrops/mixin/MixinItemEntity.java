@@ -28,8 +28,6 @@ public abstract class MixinItemEntity extends Entity {
 
     @Shadow public abstract ItemStack getStack();
 
-    @Shadow public abstract void setToDefaultPickupDelay();
-
     public MixinItemEntity(EntityType<?> entityType_1, World world_1) {
         super(entityType_1, world_1);
     }
